@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JobService } from '../shared/job.service';
+import { Job } from '../shared/job.model';
 
 @Component({
   selector: 'streambits-job-list',
@@ -8,12 +9,23 @@ import { JobService } from '../shared/job.service';
 })
 export class JobListComponent implements OnInit {
 
-  jobs: any[] = [];
+  jobs: Job[] = [];
 
   constructor(private jobService: JobService) { }
 
   ngOnInit() {
-  	this.jobs = this.jobService.getJobs();
+  	const jobObservable = this.jobService.getJobs();
+
+  	jobObservable.subscribe(
+  		(jobs: Job[]) => {
+  			this.jobs = jobs;
+  		},
+  		(err) => {
+
+  		},
+  		() => {
+
+  		});
   }
 
 }
