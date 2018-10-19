@@ -1,17 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule} from '@angular/router'
 
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './common/header/header.component';
+import { JobComponent } from './job/job.component';
+import { TempComponent } from './temp/temp.component';
+
+import { JobModule } from './job/job.module';
+
+const routes: Routes = [
+  {path: '', component: JobComponent},
+  {path: 'temp', component: TempComponent}
+]
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    TempComponent
   ],
   imports: [
-    BrowserModule
+    RouterModule.forRoot(routes),
+    BrowserModule,
+    JobModule
   ],
   providers: [],
   bootstrap: [AppComponent]
