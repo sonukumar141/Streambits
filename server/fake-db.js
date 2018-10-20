@@ -4,8 +4,8 @@ class FakeDb {
 	constructor(){
 		this.jobs = [{
                   title: "Plumber Job",
-                  city: "Mumbai",
-                  street: "Marine Lines",
+                  city: "San Francisco",
+                  street: "Main street",
                   category: "Blue Color",
                   image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/11/image.jpeg",
                   description: "Another nice Job in Mumbai.",
@@ -13,11 +13,11 @@ class FakeDb {
                   },
                   {
                   title: "Javascript Job",
-                  city: "Mumbai",
-                  street: "Marine Lines",
+                  city: "Pune",
+                  street: "Pimpri",
                   category: "White color",
                   image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/11/image.jpeg",
-                  description: "Another nice Job in Mumbai.",
+                  description: "Another nice Job in Pune.",
                   price: 11
                   },
                   {
