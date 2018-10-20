@@ -7,7 +7,7 @@ class FakeDb {
                   city: "San Francisco",
                   street: "Main street",
                   category: "Blue Color",
-                  image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
+                  image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/11/image.jpeg",
                   description: "Very nice apartment in center of the city.",
                   price: 43
                   },
@@ -16,7 +16,7 @@ class FakeDb {
                   city: "New York",
                   street: "Time Square",
                   category: "White color",
-                  image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
+                  image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/11/image.jpeg",
                   description: "Very nice apartment in center of the city.",
                   price: 11
                   },
@@ -25,7 +25,7 @@ class FakeDb {
                   city: "Spisska Nova Ves",
                   street: "Banicka 1",
                   category: "White Color",
-                  image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
+                  image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/11/image.jpeg",
                   description: "Very nice apartment in center of the city.",
                   price: 23
 }]
