@@ -1,1 +1,41 @@
-<p>{{job.title}}</p>
+<section id="jobDetails" *ngIf="job">
+  <div class="upper-section">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{job.image}}" alt="">
+      </div>
+      <div class="col-md-6">
+        <!-- Will be replaced with map !!!! -->
+        <img src="{{job.image}}" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="details-section">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="job">
+          <h2 class="job-type {{job.category}}">{{job.shared}} {{job.category}}</h2>
+          <h1 class="job-title">{{job.title}}</h1>
+          <h2 class="job-city">{{job.city}}</h2>
+          <p class="job-description">
+            {{job.description}}
+          </p>
+          <hr>
+          <div class="job-assets">
+            <h3 class="title">Assets</h3>
+            <div class="row">
+              <div class="col-md-6">
+                <span><i class="fa fa-location-arrow"></i> Desciption 1</span>
+              </div>
+              <div class="col-md-6">
+                <span><i class="fa fa-desktop"></i> Description 2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"> BOOKING</div>
+    </div>
+  </div>
+</section>
