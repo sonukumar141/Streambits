@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NgPipesModule } from 'ngx-pipes';
+import { MapModule } from '../common/map/map.module';
 
 import { JobListComponent } from './job-list/job-list.component';
 import { JobListItemComponent } from './job-list-item/job-list-item.component';
@@ -34,7 +35,8 @@ const routes: Routes = [
 	imports: [CommonModule,
 			  RouterModule.forChild(routes),
         HttpClientModule,
-        NgPipesModule
+        NgPipesModule,
+        MapModule
 			  ],
 	providers: [JobService]
 })
