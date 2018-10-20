@@ -3,42 +3,36 @@ const Job =  require('./models/job');
 class FakeDb {
 	constructor(){
 		this.jobs = [{
-                  title: "Nice view on ocean",
+                  title: "Plumber Job",
                   city: "San Francisco",
                   street: "Main street",
-                  category: "condo",
+                  category: "Blue Color",
                   image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-                  bedrooms: 4,
-                  shared: true,
                   description: "Very nice apartment in center of the city.",
-                  dailyRate: 43
+                  price: 43
                   },
                   {
-                  title: "Modern apartment in center",
+                  title: "Javascript Job",
                   city: "New York",
                   street: "Time Square",
-                  category: "apartment",
+                  category: "White color",
                   image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-                  bedrooms: 1,
-                  shared: false,
                   description: "Very nice apartment in center of the city.",
-                  dailyRate: 11
+                  price: 11
                   },
                   {
-                  title: "Old house in nature",
+                  title: "C++ Job",
                   city: "Spisska Nova Ves",
                   street: "Banicka 1",
-                  category: "house",
+                  category: "White Color",
                   image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-                  bedrooms: 5,
-                  shared: true,
                   description: "Very nice apartment in center of the city.",
-                  dailyRate: 23
-				}]
+                  price: 23
+}]
 	}
 
 	async cleanDb(){
-		await Job.deleteOne({});
+		await Job.deleteMany({});
 	}
 
 	pushJobsToDb(){

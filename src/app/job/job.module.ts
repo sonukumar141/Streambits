@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core'
 import {CommonModule} from '@angular/common';
 import { Routes, RouterModule} from '@angular/router';
+import { HttpClientModule} from '@angular/common/http';
 
 import { JobListComponent } from './job-list/job-list.component';
 import { JobListItemComponent } from './job-list-item/job-list-item.component';
@@ -27,7 +28,8 @@ const routes: Routes = [
     	JobDetailComponent
 	],
 	imports: [CommonModule,
-			  RouterModule.forChild(routes)
+			  RouterModule.forChild(routes),
+        HttpClientModule
 
 			  ],
 	providers: [JobService]
