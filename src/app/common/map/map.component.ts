@@ -16,11 +16,10 @@ export class MapComponent implements OnInit {
   constructor(private mapService: MapService) { }
 
   ngOnInit() {
-
   }
 
   mapReadyHandler(){
-  	this.mapService.geocodeLocation(this.location).subscribe( (coordinates) => {
+  	this.mapService.getGeoLocation(this.location).subscribe( (coordinates) => {
   		this.lat = coordinates.lat;
   		this.lng = coordinates.lng;
   	});

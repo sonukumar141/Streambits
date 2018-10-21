@@ -15,26 +15,20 @@ export class MapService {
 	}
 
 	private cacheLocation(location: string, coordinates: any){
-		const camelizedLocation = this.camelize(location);
-
-		this.locationCache[camelizedLocation] = coordinates;
+		this.locationCache[this.camelize(location)] = coordinates;
 	}
+
 
 	private isLocationCached(location): boolean{
 		return this.locationCache[this.camelize(location)];
 	}
 
-	public geocodeLocation(location: string): Observable<any> {
-		this.geoCoder = new (<any>window).google.maps.Geocoder();
+	private geocodeLocation(location: string): Observable<any> {
+
+		if(!this.geoCoder){	this.geoCoder = new (<any>window).google.maps.Geocoder(); }
 
 		return new Observable((observer) => {
-
-			if(this.isLocationCached(location)){
-				// return location from cache
-				observer.next(this.locationCache[this.camelize(location)]);
-			}
-			else
-			{
+		
 				this.geoCoder.geocode({address: location}, (result, status) => {
 				if(status === 'OK'){
 					const geometry = result[0].geometry.location;
@@ -49,8 +43,20 @@ export class MapService {
 					observer.error('Location could not be geocoded');
 				}
 			});
+		});
+	}
+
+	public getGeoLocation(location: string): Observable<any> {
+
+
+			if(this.isLocationCached(location)){
+				// return location from cache
+				return Observable.of(this.locationCache[this.camelize(location)]);
+			}
+			else
+			{
+				return this.geocodeLocation(location);
 		}
-	});
 
 	}
 }
