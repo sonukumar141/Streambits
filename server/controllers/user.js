@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const { normalizeErrors } = require('../helpers/mongoose');
+const jwt = require('jsonwebtoken');	
+const config = require('../config/dev');
 
 exports.auth =  function(req, res){
 
@@ -17,8 +19,15 @@ exports.auth =  function(req, res){
 		if(!user){
 			return res.status(422).send({errors: [{title: 'Invalid User!', detail: 'User does not exist'}]});
 		}
-		if(user.isSamePassword(password)){
+		if(user.hasSamePassword(password)){
 			// Jwt token
+			const token = jwt.sign({
+  			userId: user.id,
+  			username: user.username
+			}, config.SECRET, { expiresIn: '1h' });
+
+			return res.json(token);
+
 		}else {
 			return res.status(422).send({errors: [{title: 'Wrong Data!', detail: 'Wrong email or password'}]});
 		}
