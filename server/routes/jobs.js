@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const Job = require('../models/job');
 
+const UserCtrl = require('../controllers/user');
+
+router.get('/secret', UserCtrl.authMiddleware, function(req, res){
+	res.json({"secret": true});
+});
+
 
 router.get('', function(req, res){
 	Job.find({}, function(err, foundJobs){
