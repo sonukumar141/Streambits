@@ -8,6 +8,7 @@ import { HeaderComponent } from './common/header/header.component';
 import { JobComponent } from './job/job.component';
 
 import { JobModule } from './job/job.module';
+import { AuthModule } from './auth/auth.module';
 
 const routes: Routes = [
   {path: '', redirectTo: '/jobs', pathMatch: 'full'}
@@ -21,7 +22,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
-    JobModule
+    JobModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
