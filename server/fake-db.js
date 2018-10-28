@@ -1,4 +1,5 @@
 const Job =  require('./models/job');
+const User = require("./models/user");
 
 class FakeDb {
 	constructor(){
@@ -75,23 +76,37 @@ class FakeDb {
                   price: 23
                   }                  
 
-                  ]
+                  ];
+
+                  this.users = [{
+                        username: "Test User",
+                        email: "test@gmail.com",
+                        password: "testtest"
+                  }];
 	}
 
 	async cleanDb(){
+            await User.deleteMany({});
 		await Job.deleteMany({});
 	}
 
-	pushJobsToDb(){
+	pushDataToDb(){
+            const user = new User(this.users[0]);
+
 		this.jobs.forEach((job) => {
 			const newJob = new Job(job);
+                  newJob.user = user;
+
+                  user.jobs.push(newJob);
 			newJob.save();
-		})
+		});
+
+            user.save();
 	}
 
-	seedDb(){
-		this.cleanDb();
-		this.pushJobsToDb();
+	async seedDb(){
+		await this.cleanDb();
+		this.pushDataToDb();
 	}
 }
 
