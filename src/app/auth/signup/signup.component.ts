@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
+  formData: any = {};
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  register(){
+  	console.log(this.formData);
+  }
 }
