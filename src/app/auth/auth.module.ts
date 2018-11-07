@@ -6,6 +6,8 @@ import { CommonModule } from  '@angular/common';
 import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
 
+import { AuthService } from './shared/auth.service';
+
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
   	{path: 'signup', component: SignupComponent}
@@ -21,7 +23,9 @@ const routes: Routes = [
     FormsModule,
     CommonModule
   ],
-  providers: []
+  providers: [
+  	AuthService
+  ]
 
 })
 export class AuthModule { }

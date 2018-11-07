@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'streambits-signup',
@@ -9,12 +10,18 @@ export class SignupComponent implements OnInit {
 
   formData: any = {};
 
-  constructor() { }
+  constructor(private auth: AuthService ) { }
 
   ngOnInit() {
   }
 
   register(){
-  	console.log(this.formData);
+  	this.auth.signup(this.formData).subscribe(
+  	()=> {
+  		console.log('Success');
+  	}, 
+  	(errorResponse)=>{
+  		console.log('errorResponse');
+  	})
   }
 }
