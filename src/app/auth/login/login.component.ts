@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../shared/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'streambits-login',
@@ -9,8 +11,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  errors: any[] = [];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private auth: AuthService, 
+              private router: Router) { }
 
   ngOnInit() {
   	this.initForm();
@@ -30,6 +35,17 @@ export class LoginComponent implements OnInit {
 
   isRequired(fieldName): boolean{
   	return this.loginForm.controls[fieldName].errors.required
+  }
+
+  login(){
+  	this.auth.login(this.loginForm.value).subscribe(
+  	(token) => {
+
+     	this.router.navigate(['/jobs']);
+  	},
+  	(errorResponse) => {
+  		this.errors = errorResponse.error.errors;
+  	})
   }
 
 }
