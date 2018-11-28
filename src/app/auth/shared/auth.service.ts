@@ -46,8 +46,19 @@ export class AuthService{
 
 	}
 
+	public logout(){
+		localStorage.removeItem('streambits_auth');
+		localStorage.removeItem('streambits_meta');
+
+		this.decodedToken = new DecodedToken();
+	}
+
 	public isAuthenticated(): boolean {
 		return moment().isBefore(this.getExpiration());
+	}
+
+	public getUsername(): string {
+		return this.decodedToken.username;
 	}
 
 
