@@ -24,7 +24,8 @@ const userSchema = new Schema({
 		required: 'Password is required',
 
 	},
-	jobs: [{type: Schema.Types.ObjectId, ref: 'Job'}]	
+	jobs: [{type: Schema.Types.ObjectId, ref: 'Job'}],
+	bookings: [{type: Schema.Types.ObjectId, ref: 'Booking'}]	
 
 });
 
