@@ -10,7 +10,8 @@ const jobSchema = new Schema({
         description: { type: String, required: true },
         price: Number,
         createdAt: { type: Date, default: Date.now },
-        user: {type: Schema.Types.ObjectId, ref: 'User'}
+        user: {type: Schema.Types.ObjectId, ref: 'User'},
+        bookings: [{type: Schema.Types.ObjectId, ref: 'Booking'}]
 });
 
 module.exports = mongoose.model('Job', jobSchema);
