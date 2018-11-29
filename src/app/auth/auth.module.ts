@@ -6,7 +6,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
  
 import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
-
+import {AuthComponent} from './auth.component';
+ 
 import { AuthService } from './shared/auth.service';
 import { AuthGuard } from './shared/auth.guard';
 import { TokenInterceptor } from './shared/token.interceptor';
@@ -19,7 +20,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
   LoginComponent,
-  SignupComponent  
+  SignupComponent,
+  AuthComponent
 ],
   imports: [
     RouterModule.forChild(routes),
