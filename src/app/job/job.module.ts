@@ -14,12 +14,14 @@ import { JobDetailComponent } from './job-detail/job-detail.component';
 
 import { UppercasePipe } from '../common/pipes/uppercase.pipe';
 
+import { AuthGuard } from '../auth/shared/auth.guard';
+
 const routes: Routes = [
   {path: 'jobs', 
   component: JobComponent,
   children: [
   	{path: '', component: JobListComponent},
-  	{path: ':jobId', component: JobDetailComponent}
+  	{path: ':jobId', component: JobDetailComponent, canActivate: [AuthGuard]}
   ]
   }
 ]
