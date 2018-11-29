@@ -57,6 +57,10 @@ export class AuthService{
 		return moment().isBefore(this.getExpiration());
 	}
 
+	public getAuthToken(): string {
+		return localStorage.getItem('streambits_auth');
+	}
+
 	public getUsername(): string {
 		return this.decodedToken.username;
 	}
