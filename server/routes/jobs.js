@@ -10,25 +10,29 @@ router.get('/secret', UserCtrl.authMiddleware, function(req, res){
 
 
 router.get('', function(req, res){
-	Job.find({}, function(err, foundJobs){
-		res.json(foundJobs);
-	});
+
+		Job.find({})
+			.select('-bookings')
+			.exec(function(err, foundJobs) {
+
+			res.json(foundJobs);
+		});
 });
 
 router.get('/:id', function(req, res){
 
 	const jobId = req.params.id;
 
+	Job.findById(jobId)
+		.populate('user', 'username -_id')
+		.populate('bookings', 'startAt endAt -_id')
+		.exec(function(err, foundJob) {
+			if(err){
+				return res.status(422).send({errors: [{title: 'Job Error', detail: 'Could not find Job'}]});
+			}
 
-
-	Job.findById(jobId, function(err, foundJob){
-
-	if(err){
-	res.status(422).send({errors: [{title: 'Job Error', detail: 'Could not find Job'}]});
-	}
-
-	res.json(foundJob);
-	});
+			return res.json(foundJob);
+		});
 });
 
 module.exports = router;
