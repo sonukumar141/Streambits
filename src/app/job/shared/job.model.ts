@@ -1,3 +1,5 @@
+import { Booking } from '../../booking/shared/booking.model';
+
 export class Job 
 {
 	_id: string;
@@ -10,6 +12,8 @@ export class Job
 	shared: boolean;
 	description: string;
 	dailyRate: number;
+	createdAt: string;
+	bookings: Booking[];
 	
 }
 
