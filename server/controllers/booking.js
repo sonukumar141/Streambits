@@ -1,5 +1,6 @@
 const Booking = require('../models/booking');
 const Job = require('../models/job');
+const User = require('../models/user');
 const { normalizeErrors } = require('../helpers/mongoose');
 const moment = require('moment');
 
@@ -24,13 +25,25 @@ exports.createBooking = function(req, res) {
 
 			// check here for valid booking
 			if(isValidBooking(booking, foundJob)) {
-
+				booking.user = user;
+				booking.job = foundJob;
 				foundJob.bookings.push(booking);
-				foundJob.save();
-				booking.save();
+
+				booking.save(function(err){
+					if(err) {
+						return res.status(422).send({errors: normalizeErrors(err.errors)});
+					}
+
+					foundJob.save()
+					User.update({_id: user.id}, {$push: {bookings: booking}}, function(){});
+
+					return res.json({startAt: booking.startAt, endAt: booking.endAt});
+				});
+
+				
 				// update job and update user
 
-				return res.json({'created': true});
+				
 
 			}else{
 				return res.status(422).send({errors: [{title: 'Invalid Booking!', detail: 'Choosen dates are already taken!'}]});
