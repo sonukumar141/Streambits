@@ -9,14 +9,15 @@ import { Daterangepicker } from 'ng2-daterangepicker';
 import { JobListComponent } from './job-list/job-list.component';
 import { JobListItemComponent } from './job-list-item/job-list-item.component';
 import { JobComponent } from './job.component';
+import { JobDetailComponent } from './job-detail/job-detail.component';
+import { JobDetailBookingComponent } from './job-detail/job-detail-booking/job-detail-booking.component';
 
 import { JobService } from './shared/job.service';
-import { JobDetailComponent } from './job-detail/job-detail.component';
-
+import { HelperService } from '../common/service/helper.service';
 import { UppercasePipe } from '../common/pipes/uppercase.pipe';
 
 import { AuthGuard } from '../auth/shared/auth.guard';
-import { JobDetailBookingComponent } from './job-detail/job-detail-booking/job-detail-booking.component';
+
 
 const routes: Routes = [
   {path: 'jobs', 
@@ -44,7 +45,10 @@ const routes: Routes = [
         MapModule,
         Daterangepicker
 			  ],
-	providers: [JobService]
+	providers: [
+      JobService,
+      HelperService
+    ]
 })
 
 export class JobModule {

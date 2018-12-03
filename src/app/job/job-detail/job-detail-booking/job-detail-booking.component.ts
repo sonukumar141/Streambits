@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Booking } from '../../../booking/shared/booking.model';
+import { HelperService } from '../../../common/service/helper.service';
 
 @Component({
   selector: 'streambits-job-detail-booking',
@@ -12,6 +13,7 @@ export class JobDetailBookingComponent implements OnInit {
   @Input() bookings: Booking[];
 
   daterange: any = {};
+  bookedOutDates: any[] = [];
 
   public options: any = {
   	locale: {format: 'DD-MM-YYYY'},
@@ -19,7 +21,7 @@ export class JobDetailBookingComponent implements OnInit {
   	opens: 'left'
   };
 
-  constructor() { }
+  constructor(private helper: HelperService) { }
 
   ngOnInit() {
 		this.getBookedOutDates();
@@ -28,7 +30,8 @@ export class JobDetailBookingComponent implements OnInit {
   private getBookedOutDates() {
   	if(this.bookings && this.bookings.length > 0) {
   		this.bookings.forEach((booking: Booking) => {
-  			console.log(booking);
+  			const dateRange =  this.helper.getRangeOfDates(booking.startAt, booking.endAt);
+  			this.bookedOutDates.push(...dateRange);
   		}); 
   	}
   }
