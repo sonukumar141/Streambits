@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Booking } from '../../../booking/shared/booking.model';
 import { HelperService } from '../../../common/service/helper.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'streambits-job-detail-booking',
@@ -16,15 +17,21 @@ export class JobDetailBookingComponent implements OnInit {
   bookedOutDates: any[] = [];
 
   public options: any = {
-  	locale: {format: 'DD-MM-YYYY'},
+  	locale: {format: Booking.DATE_FORMAT},
   	alwaysShowCalendars: false,
-  	opens: 'left'
+  	opens: 'left',
+  	isInvalidDate: this.checkForInvalidDates.bind(this)
   };
 
   constructor(private helper: HelperService) { }
 
   ngOnInit() {
 		this.getBookedOutDates();
+  }
+
+  private checkForInvalidDates(date) {
+  	debugger;
+  	return this.bookedOutDates.includes(date.format(Booking.DATE_FORMAT)) || date.diff(moment(), 'days') < 0;
   }
 
   private getBookedOutDates() {
