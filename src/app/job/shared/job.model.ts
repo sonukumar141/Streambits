@@ -11,7 +11,7 @@ export class Job
 	bedrooms: number;
 	shared: boolean;
 	description: string;
-	dailyRate: number;
+	price: number;
 	createdAt: string;
 	bookings: Booking[];
 	

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Booking } from '../../../booking/shared/booking.model';
+import { Job } from '../../shared/job.model';
 import { HelperService } from '../../../common/service/helper.service';
 import * as moment from 'moment';
 
@@ -10,8 +11,7 @@ import * as moment from 'moment';
 })
 export class JobDetailBookingComponent implements OnInit {
 
-  @Input() price: number;
-  @Input() bookings: Booking[];
+  @Input() job: Job;
 
   newBooking: Booking;
 
@@ -37,12 +37,18 @@ export class JobDetailBookingComponent implements OnInit {
   }
 
   private getBookedOutDates() {
-  	if(this.bookings && this.bookings.length > 0) {
-  		this.bookings.forEach((booking: Booking) => {
+  	const bookings: Booking[] = this.job.bookings;
+
+  	if(bookings && bookings.length > 0) {
+  		bookings.forEach((booking: Booking) => {
   			const dateRange =  this.helper.getBookingRangeOfDates(booking.startAt, booking.endAt);
   			this.bookedOutDates.push(...dateRange);
   		}); 
   	}
+  }
+
+  bookJob() {
+  	console.log(this.newBooking);
   }
 
   public selectedDate(value: any, datepicker?: any) {
@@ -50,12 +56,7 @@ export class JobDetailBookingComponent implements OnInit {
   	this.newBooking.startAt = this.helper.formatBookingDate(value.start);
   	this.newBooking.endAt = this.helper.formatBookingDate(value.end);
   	this.newBooking.days = -(value.start.diff(value.end, 'days'));
-
-  	console.log(this.newBooking);
-
-  	this.daterange.start = value.start;
-  	this.daterange.end = value.end;
-  	this.daterange.label = value.label;
+  	this.newBooking.totalPrice = this.newBooking.days * this.job.price;
   }
 
 }
