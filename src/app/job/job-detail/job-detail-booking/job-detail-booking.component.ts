@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Booking } from '../../../booking/shared/booking.model';
 import { Job } from '../../shared/job.model';
 import { HelperService } from '../../../common/service/helper.service';
+import { BookingService } from '../../../booking/shared/booking.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 
@@ -15,6 +16,7 @@ export class JobDetailBookingComponent implements OnInit {
   @Input() job: Job;
 
   newBooking: Booking;
+  modalRef: any;
 
   daterange: any = {};
   bookedOutDates: any[] = [];
@@ -27,7 +29,8 @@ export class JobDetailBookingComponent implements OnInit {
   };
 
   constructor(private helper: HelperService, 
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private bookingService: BookingService) { }
 
   ngOnInit() {
   		this.newBooking = new Booking();
@@ -50,11 +53,21 @@ export class JobDetailBookingComponent implements OnInit {
   }
 
   openConfirmModal(content) {
-  	this.modalService.open(content);
+  	this.modalRef = this.modalService.open(content);
   }
 
   createBooking() {
   	console.log(this.newBooking);
+
+  	this.newBooking.job = this.job;
+  	this.bookingService.createBooking(this.newBooking).subscribe(
+  	(bookingData) => {
+  		this.newBooking = new Booking();
+  		this.modalRef.close();
+  	},
+  	() => {
+
+  	})
   }
 
   public selectedDate(value: any, datepicker?: any) {

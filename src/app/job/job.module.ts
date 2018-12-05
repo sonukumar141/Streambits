@@ -14,6 +14,7 @@ import { JobDetailComponent } from './job-detail/job-detail.component';
 import { JobDetailBookingComponent } from './job-detail/job-detail-booking/job-detail-booking.component';
 
 import { JobService } from './shared/job.service';
+import { BookingService } from '../booking/shared/booking.service';
 import { HelperService } from '../common/service/helper.service';
 import { UppercasePipe } from '../common/pipes/uppercase.pipe';
 
@@ -49,7 +50,8 @@ const routes: Routes = [
 			  ],
 	providers: [
       JobService,
-      HelperService
+      HelperService,
+      BookingService
     ]
 })
 
