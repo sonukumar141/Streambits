@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Booking } from '../../../booking/shared/booking.model';
 import { Job } from '../../shared/job.model';
 import { HelperService } from '../../../common/service/helper.service';
 import { BookingService } from '../../../booking/shared/booking.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DaterangePickerComponent } from 'ng2-daterangepicker';
 import * as moment from 'moment';
 
 @Component({
@@ -14,7 +15,9 @@ import * as moment from 'moment';
 export class JobDetailBookingComponent implements OnInit {
 
   @Input() job: Job;
-
+  @ViewChild(DaterangePickerComponent)
+  	private picker: DaterangePickerComponent;
+ 	
   newBooking: Booking;
   modalRef: any;
 
@@ -26,6 +29,7 @@ export class JobDetailBookingComponent implements OnInit {
   	locale: {format: Booking.DATE_FORMAT},
   	alwaysShowCalendars: false,
   	opens: 'left',
+  	autoUpdateInput: false,
   	isInvalidDate: this.checkForInvalidDates.bind(this)
   };
 
@@ -58,6 +62,13 @@ export class JobDetailBookingComponent implements OnInit {
   	this.bookedOutDates.push(...dateRange);
   }
 
+
+  private resetDatePicker() {
+  	this.picker.datePicker.setStartDate(moment());
+  	this.picker.datePicker.setEndDate(moment());
+  	this.picker.datePicker.element.val('');
+  }
+
   openConfirmModal(content) {
   	this.errors = [];
   	this.modalRef = this.modalService.open(content);
@@ -72,6 +83,7 @@ export class JobDetailBookingComponent implements OnInit {
   		this.addNewBookedOutDates(bookingData);
   		this.newBooking = new Booking();
   		this.modalRef.close();
+  		this.resetDatePicker();
   	},
   	(errorResponse: any) => {
   		this.errors = errorResponse.error.errors;
@@ -80,6 +92,7 @@ export class JobDetailBookingComponent implements OnInit {
 
   public selectedDate(value: any, datepicker?: any) {
 
+  	this.options.autoUpdateInput = true;
   	this.newBooking.startAt = this.helper.formatBookingDate(value.start);
   	this.newBooking.endAt = this.helper.formatBookingDate(value.end);
   	this.newBooking.days = -(value.start.diff(value.end, 'days'));
