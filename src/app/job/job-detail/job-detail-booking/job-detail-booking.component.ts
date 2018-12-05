@@ -20,6 +20,7 @@ export class JobDetailBookingComponent implements OnInit {
 
   daterange: any = {};
   bookedOutDates: any[] = [];
+  errors: any[] = [];
 
   public options: any = {
   	locale: {format: Booking.DATE_FORMAT},
@@ -52,7 +53,13 @@ export class JobDetailBookingComponent implements OnInit {
   	}
   }
 
+  private addNewBookedOutDates(bookingData: any) {
+  	const dateRange =  this.helper.getBookingRangeOfDates(bookingData.startAt, bookingData.endAt);
+  	this.bookedOutDates.push(...dateRange);
+  }
+
   openConfirmModal(content) {
+  	this.errors = [];
   	this.modalRef = this.modalService.open(content);
   }
 
@@ -61,12 +68,13 @@ export class JobDetailBookingComponent implements OnInit {
 
   	this.newBooking.job = this.job;
   	this.bookingService.createBooking(this.newBooking).subscribe(
-  	(bookingData) => {
+  	(bookingData: any) => {
+  		this.addNewBookedOutDates(bookingData);
   		this.newBooking = new Booking();
   		this.modalRef.close();
   	},
-  	() => {
-
+  	(errorResponse: any) => {
+  		this.errors = errorResponse.error.errors;
   	})
   }
 
