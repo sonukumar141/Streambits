@@ -53,6 +53,10 @@ export class JobDetailBookingComponent implements OnInit {
   	this.modalService.open(content);
   }
 
+  createBooking() {
+  	console.log(this.newBooking);
+  }
+
   public selectedDate(value: any, datepicker?: any) {
 
   	this.newBooking.startAt = this.helper.formatBookingDate(value.start);
