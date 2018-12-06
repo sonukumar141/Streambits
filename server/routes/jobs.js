@@ -8,17 +8,6 @@ router.get('/secret', UserCtrl.authMiddleware, function(req, res){
 	res.json({"secret": true});
 });
 
-
-router.get('', function(req, res){
-
-		Job.find({})
-			.select('-bookings')
-			.exec(function(err, foundJobs) {
-
-			res.json(foundJobs);
-		});
-});
-
 router.get('/:id', function(req, res){
 
 	const jobId = req.params.id;
@@ -34,5 +23,22 @@ router.get('/:id', function(req, res){
 			return res.json(foundJob);
 		});
 });
+
+router.get('', function(req, res){
+		const city = req.query.city;
+
+		if(city) {
+			return res.json({city});
+		}else {
+			Job.find({})
+				.select('-bookings')
+				.exec(function(err, foundJobs) {
+
+				return res.json(foundJobs);
+			});
+		}
+});
+
+
 
 module.exports = router;
