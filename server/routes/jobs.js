@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Job = require('../models/job');
+const User = require('../models/user');
 const { normalizeErrors } = require('../helpers/mongoose');
 
 const UserCtrl = require('../controllers/user');
@@ -25,31 +26,44 @@ router.get('/:id', function(req, res){
 		});
 });
 
-router.get('', function(req, res){
-		const city = req.query.city;
 
-		if(city) {
-			Job.find({city: city.toLowerCase()})
-				.select('-bookings')
-				.exec(function(err, filteredJobs) {
-			if(err) {
-				return res.status(422).send({errors: normalizeErrors(err.errors)});
-			}
+router.post('', UserCtrl.authMiddleware, function(req, res) {
+	const {title, city, street, category, image, description, price} = req.body;
+	const user = res.locals.user;
 
-			if(filteredJobs.length === 0) {
-				return res.status(422).send({errors: [{title: 'No Jobs Found!', detail: `There are no jobs for city ${city}`}]});
-			}
+	const job = new Job({title, city, street, category, image, description, price});
+	job.user = user;
 
-			return res.json(filteredJobs);
-			})
-		}else {
-			Job.find({})
-				.select('-bookings')
-				.exec(function(err, foundJobs) {
-
-				return res.json(foundJobs);
-			});
+	Job.create(job, function(err, newJob) {
+		if(err) {
+			return res.status(422).send({errors: normalizeErrors(err.errors)});
 		}
+
+		User.update({_id: user.id}, {$push: {jobs: newJob}}, function(){});
+
+		return res.json(newJob);
+	});
+});
+
+router.get('', function(req, res){
+	const city = req.query.city;
+
+	const query = city ? {city: city.toLowerCase()} : {};
+
+		Job.find(query)
+			.select('-bookings')
+			.exec(function(err, foundJobs) {
+
+		if(err) {
+			return res.status(422).send({errors: normalizeErrors(err.errors)});
+		}
+
+		if(city && foundJobs.length === 0) {
+			return res.status(422).send({errors: [{title: 'No Jobs Found!', detail: `There are no jobs for city ${city}`}]});
+		}
+
+			return res.json(foundJobs);
+		});
 });
 
 
