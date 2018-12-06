@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Booking } from '../../../booking/shared/booking.model';
 import { Job } from '../../shared/job.model';
 import { HelperService } from '../../../common/service/helper.service';
@@ -8,6 +8,7 @@ import { DaterangePickerComponent } from 'ng2-daterangepicker';
 import * as moment from 'moment';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   selector: 'streambits-job-detail-booking',
   templateUrl: './job-detail-booking.component.html',
   styleUrls: ['./job-detail-booking.component.scss']
