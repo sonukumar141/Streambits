@@ -16,5 +16,9 @@ export class JobService{
   public getJobs(): Observable<any> {
     return this.http.get('/api/v1/jobs');
   }
+
+  public getJobsByCity(city: string): Observable<any> {
+    return this.http.get(`/api/v1/jobs?city=${city}`);
+  }
 	
 }
