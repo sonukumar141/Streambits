@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Job = require('../models/job');
+const { normalizeErrors } = require('../helpers/mongoose');
 
 const UserCtrl = require('../controllers/user');
 
@@ -28,7 +29,19 @@ router.get('', function(req, res){
 		const city = req.query.city;
 
 		if(city) {
-			return res.json({city});
+			Job.find({city: city.toLowerCase()})
+				.select('-bookings')
+				.exec(function(err, filteredJobs) {
+			if(err) {
+				return res.status(422).send({errors: normalizeErrors(err.errors)});
+			}
+
+			if(filteredJobs.length === 0) {
+				return res.status(422).send({errors: [{title: 'No Jobs Found!', detail: `There are no jobs for city ${city}`}]});
+			}
+
+			return res.json(filteredJobs);
+			})
 		}else {
 			Job.find({})
 				.select('-bookings')
