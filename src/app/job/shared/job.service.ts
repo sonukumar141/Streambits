@@ -21,4 +21,7 @@ export class JobService{
     return this.http.get(`/api/v1/jobs?city=${city}`);
   }
 	
+  public createJob(job: Job): Observable<any> {
+    return this.http.post('/api/v1/jobs', job);
+  }
 }

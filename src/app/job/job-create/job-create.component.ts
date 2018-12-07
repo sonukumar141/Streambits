@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Job } from '../shared/job.model';
+import { JobService } from '../shared/job.service';
 
 @Component({
   selector: 'streambits-job-create',
@@ -9,15 +10,26 @@ import { Job } from '../shared/job.model';
 export class JobCreateComponent implements OnInit {
 
   newJob: Job;
+  jobCategories = Job.CATEGORIES;
 
-  constructor() { }
+  constructor(private jobService: JobService) { }
+
+  handleImageChange() {
+  	this.newJob.image = "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg";
+  }
 
   ngOnInit() {
   	this.newJob = new Job();
   }
 
   createJob() {
-  	console.log(this.newJob);
+  	this.jobService.createJob(this.newJob).subscribe(
+  	() => {
+
+  	},
+  	() => {
+  	
+  	})
   }
 
 }
