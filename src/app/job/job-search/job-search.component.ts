@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { JobService } from '../shared/job.service';
 import { Job } from '../shared/job.model';
 
+import { HttpErrorResponse } from '@angular/common/http';
+
 @Component({
   selector: 'streambits-job-search',
   templateUrl: './job-search.component.html',
@@ -12,6 +14,8 @@ export class JobSearchComponent implements OnInit {
 
   city: string;
   jobs: Job[] = [];
+
+  errors: any[] = [];
 
   constructor(private route: ActivatedRoute, 
   			  private jobService: JobService) { }
@@ -28,8 +32,8 @@ export class JobSearchComponent implements OnInit {
   	(jobs: Job[]) => {
   		this.jobs = jobs;
   	},
-  	() => {
-
+  	(errorResponse: HttpErrorResponse) => {
+  		this.errors = errorResponse.error.errors;
   	})
   }
 
