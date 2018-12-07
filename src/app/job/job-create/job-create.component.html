@@ -10,7 +10,8 @@
                    class="form-control"
                    id="title"
                    name="title"
-                   [(ngModel)]="newJob.title">
+                   [(ngModel)]="newJob.title"
+                   required>
           </div>
 
           <div class="form-group">
@@ -19,7 +20,8 @@
                    class="form-control"
                    id="city"
                    name="city"
-                   [(ngModel)]="newJob.city">
+                   [(ngModel)]="newJob.city"
+                   required>
           </div>
 
           <div class="form-group">
@@ -28,7 +30,8 @@
                    class="form-control"
                    id="street"
                    name="street"
-                   [(ngModel)]="newJob.street">
+                   [(ngModel)]="newJob.street"
+                   required>
           </div>
 
           <div class="form-group">
@@ -37,7 +40,8 @@
             <select class="form-control"
                     id="category"
                     name="category"
-                    [(ngModel)]="newJob.category">
+                    [(ngModel)]="newJob.category"
+                    required>
               <option *ngFor="let category of jobCategories"> {{category}} </option>
             </select>
           </div>
@@ -49,7 +53,8 @@
                    class="form-control"
                    id="image"
                    placeholder="Upload file..."
-                   (change)="handleImageChange()">
+                   (change)="handleImageChange()"
+                   required>
           </div>
 
           <div class="form-group">
@@ -59,7 +64,8 @@
                       class="form-control"
                       id="description"
                    name="description"
-                   [(ngModel)]="newJob.description">
+                   [(ngModel)]="newJob.description"
+                   required>
             </textarea>
           </div>
 
@@ -74,12 +80,22 @@
                      class="form-control"
                      id="dailyRate"
                      name="price"
-                     [(ngModel)]="newJob.price">
+                     [(ngModel)]="newJob.price"
+                     required>
             </div>
           </div>
 
-          <button (click)="createJob()" type="button" class="btn btn-bwm">Submit</button>
+          <button (click)="createJob()" 
+          		  [disabled]="!jobForm.form.valid"
+          		  type="button" 
+          		  class="btn btn-bwm">Submit
+          </button>
         </form>
+            <div *ngIf="errors.length > 0" class="alert alert-danger">
+        		<p *ngFor="let error of errors">
+        			{{error.detail}}
+        		</p>
+        	</div>
       </div>
       <div class="col-md-6 ml-auto">
         <div class="image-container">
