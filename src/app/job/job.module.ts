@@ -27,7 +27,7 @@ const routes: Routes = [
   children: [
   	{path: '', component: JobListComponent},
   	{path: ':jobId', component: JobDetailComponent, canActivate: [AuthGuard]},
-    {path: ':city/j', component: JobSearchComponent}
+    {path: ':city/h', component: JobSearchComponent}
   ]
   }
 ]

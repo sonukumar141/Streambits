@@ -28,6 +28,9 @@ export class JobSearchComponent implements OnInit {
   }
 
   getSearchJobs() {
+    this.errors =  [];
+    this.jobs = [];
+
   	this.jobService.getJobsByCity(this.city).subscribe(
   	(jobs: Job[]) => {
   		this.jobs = jobs;

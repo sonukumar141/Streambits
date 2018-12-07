@@ -16,8 +16,11 @@ export class HeaderComponent{
 
 	logout() {
 		this.auth.logout();
-
 		this.router.navigate(['/login']);
+	}
+
+	search(city: string) {
+		city ? this.router.navigate([`/jobs/${city}/h`]) : this.router.navigate([`/jobs`]);
 	}
 	
 }
