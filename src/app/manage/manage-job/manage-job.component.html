@@ -19,7 +19,8 @@
                      class="btn btn-bwm btn-delete">Delete</button>
              <div *ngIf="jobDeleteIndex === i">
              	<p class="confirm-message">Do you confirm delete?</p> 
-             	<button class="btn btn-success">Yes</button>
+             	<button (click)="deleteJob(job._id)"
+             	        class="btn btn-success">Yes</button>
              	<button (click)="jobDeleteIndex = undefined"
              			class="btn btn-danger">No</button>
              </div>

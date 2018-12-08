@@ -24,4 +24,15 @@ export class ManageJobComponent implements OnInit {
   	})
   }
 
+  deleteJob(jobId: string)  {
+
+  	this.jobService.deleteJob(jobId).subscribe(
+  	() => {
+  		this.jobs.splice(this.jobDeleteIndex, 1);
+  		this.jobDeleteIndex = undefined;
+  	},
+  	() => {
+
+  	})
+  }
 }

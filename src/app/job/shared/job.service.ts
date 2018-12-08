@@ -28,4 +28,8 @@ export class JobService{
   public getUserJobs(): Observable<any> {
     return this.http.get('/api/v1/jobs/manage');
   }
+
+  public deleteJob(jobId: string): Observable<any> {
+    return this.http.delete(`/api/v1/jobs/${jobId}`);
+  }
 }
