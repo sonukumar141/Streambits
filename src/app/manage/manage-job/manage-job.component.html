@@ -1,4 +1,29 @@
-<p *ngFor="let job of jobs">
-  {{job.city}}
-  {{job.description}}
-</p>
+<section id="userRentals">
+  <h1 class="page-title">My Jobs</h1>
+  <div class="row">
+    <ng-container *ngIf="jobs && jobs.length > 0">
+      <div *ngFor="let job of jobs" class="col-md-4">
+        <div class="card text-center">
+          <div class="card-block">
+            <h4 class="card-title">{{job.title}} - {{job.city | ucwords}}</h4>
+            <a class="btn btn-ghost" routerLink="/jobs/{{job._id}}">Go to Job</a>
+            <span *ngIf="job.bookings.length > 0">
+              <button class="btn btn-bwm">Show Jobs</button>
+            </span>
+          </div>
+          <div class="card-footer text-muted">
+             <p>Created at {{job.createdAt | formatDate}}</p> <!-- Created At -->
+             <button type="button" class="btn btn-bwm btn-delete">Delete</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div *ngIf="jobs && jobs.length === 0" class="col-md-8">
+      <div class="alert alert-warning">
+        You dont have any jobs currenty created. If you want advertised your property
+        please follow this link.
+        <a class="btn btn-bwm" routerLink="/jobs/new">Create Job</a>
+      </div>
+    </div>
+  </div>
+</section>

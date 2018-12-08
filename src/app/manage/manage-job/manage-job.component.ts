@@ -9,7 +9,7 @@ import { Job } from '../../job/shared/job.model';
 })
 export class ManageJobComponent implements OnInit {
 
-  jobs: Job[] = [];
+  jobs: Job[];
 
   constructor(private jobService: JobService) { }
 
