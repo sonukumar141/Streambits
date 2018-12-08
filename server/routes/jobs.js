@@ -10,6 +10,21 @@ router.get('/secret', UserCtrl.authMiddleware, function(req, res){
 	res.json({"secret": true});
 });
 
+router.get('/manage', UserCtrl.authMiddleware, function(req, res) {
+	const user = res.locals.user;
+
+	Job.where({user: user})
+	   .populate('bookings')
+	   .exec(function(err, foundJobs) {
+
+	   	if(err) {
+	   		return res.status(422).send({errors: normalizeErrors(err.errors)});
+	   	}
+
+	   	return res.json(foundJobs);
+	})
+});
+
 router.get('/:id', function(req, res){
 
 	const jobId = req.params.id;
@@ -29,14 +44,15 @@ router.get('/:id', function(req, res){
 
 router.delete('/:id', UserCtrl.authMiddleware, function(req, res) {
 	const user = res.locals.user;
-	Job.findById(req.params.id)
-	   .populate('user', '_id')
-	   .populate({
+	Job
+	    .findById(req.params.id)
+	    .populate('user', '_id')
+	    .populate({
 	   		path: 'bookings',
 	   		select: 'startAt',
 	   		match: { startAt: { $gt: new Date()}}
-	   })
-	   .exec(function(err, foundJob) {
+	    })
+	    .exec(function(err, foundJob) {
 	   		if(err){
 	   			return res.status(422).send({errors: normalizeErrors(err.errors)});
 	   		}
@@ -56,7 +72,7 @@ router.delete('/:id', UserCtrl.authMiddleware, function(req, res) {
 
 	   			return res.json({'status': 'deleted'});
 	   		});
-	   })
+	   });
 });
 
 router.post('', UserCtrl.authMiddleware, function(req, res) {

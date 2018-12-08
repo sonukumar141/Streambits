@@ -40,16 +40,29 @@ exports.createBooking = function(req, res) {
 					return res.json({startAt: booking.startAt, endAt: booking.endAt});
 				});
 
-				
-				// update job and update user
-
-				
-
 			}else{
 				return res.status(422).send({errors: [{title: 'Invalid Booking!', detail: 'Choosen dates are already taken!'}]});
 			}
 		})
 } 
+
+
+exports.getUserBookings = function(req, res){
+	const user = res.locals.user;
+
+	Booking
+	   .where({user: user})
+	   .populate('job')
+	   .exec(function(err, foundBookings) {
+
+	   	if(err) {
+	   		return res.status(422).send({errors: normalizeErrors(err.errors)});
+	   	}
+
+	   	return res.json(foundBookings);
+	});
+}
+
 
 function isValidBooking(proposedBooking, job){
 	let isValid = true;
