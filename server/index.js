@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const config = require('./config/dev');
 const Job = require('./models/job');
 const FakeDb = require('./fake-db');
+const path = require('path');
 
 const jobRoutes = require('./routes/jobs'),
       userRoutes = require('./routes/users');
@@ -21,6 +22,13 @@ app.use(bodyParser.json());
 app.use('/api/v1/jobs', jobRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
+
+const appPath = path.join(__dirname, '..', 'dist');
+app.use(express.static(appPath));
+
+app.get('*', function(req, res) {
+	res.sendFile(path.resolve(appPath, 'index.html'));
+});
 
 const PORT = process.env.PORT || 3001;
 
