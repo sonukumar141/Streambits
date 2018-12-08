@@ -10,6 +10,7 @@ import { Job } from '../../job/shared/job.model';
 export class ManageJobComponent implements OnInit {
 
   jobs: Job[];
+  jobDeleteIndex: number;
 
   constructor(private jobService: JobService) { }
 
