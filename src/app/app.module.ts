@@ -10,6 +10,7 @@ import { JobComponent } from './job/job.component';
 
 import { JobModule } from './job/job.module';
 import { AuthModule } from './auth/auth.module';
+import { ManageModule } from './manage/manage.module';
 
 const routes: Routes = [
   {path: '', redirectTo: '/jobs', pathMatch: 'full'}
@@ -25,7 +26,8 @@ const routes: Routes = [
     BrowserModule,
     JobModule,
     AuthModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    ManageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
