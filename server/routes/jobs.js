@@ -27,6 +27,38 @@ router.get('/:id', function(req, res){
 });
 
 
+router.delete('/:id', UserCtrl.authMiddleware, function(req, res) {
+	const user = res.locals.user;
+	Job.findById(req.params.id)
+	   .populate('user', '_id')
+	   .populate({
+	   		path: 'bookings',
+	   		select: 'startAt',
+	   		match: { startAt: { $gt: new Date()}}
+	   })
+	   .exec(function(err, foundJob) {
+	   		if(err){
+	   			return res.status(422).send({errors: normalizeErrors(err.errors)});
+	   		}
+
+	   		if(user.id !== foundJob.user.id) {
+	   			return res.status(422).send({errors: [{title: 'Invalid User', detail: 'This job does not belongs to you.'}]});
+	   		}
+
+	   		if(foundJob.bookings.length > 0) {
+	   			return res.status(422).send({errors: [{title: 'Active Bookings!', detail: 'Cannot delete job with active booking!'}]});
+	   		}
+
+	   		foundJob.remove(function(err){
+	   			if(err){
+	   				return res.status(422).send({errors: normalizeErrors(err.errors)});
+	   			} 
+
+	   			return res.json({'status': 'deleted'});
+	   		});
+	   })
+});
+
 router.post('', UserCtrl.authMiddleware, function(req, res) {
 	const {title, city, street, category, image, description, price} = req.body;
 	const user = res.locals.user;
