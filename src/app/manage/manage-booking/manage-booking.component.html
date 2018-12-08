@@ -9,17 +9,17 @@
           </div>
           <div class="card-block">
           	<ng-container *ngIf="booking.job">
-	            <h4 class="card-title">{{booking.job.title}} - {{booking.job.city}} </h4>
+	            <h4 class="card-title">{{booking.job.title}} - {{booking.job.city | ucwords}} </h4>
 	            <p class="card-text booking-desc">{{booking.job.description}}</p>
             </ng-container>	            
-	            <p class="card-text booking-days"> {{booking.startAt}} - {{booking.endAt}} | {{booking.days}} 
+	            <p class="card-text booking-days"> {{booking.startAt | formatDate}} - {{booking.endAt | formatDate}} | {{booking.days}} 
 	            days</p>
 
             <p class="card-text booking-price"><span>Price: </span> <span class="booking-price-value"> Rs {{booking.totalPrice}}</span></p>
             <a *ngIf="booking.job" class="btn btn-bwm" routerLink="/jobs/{{booking.job._id}}">Go to Rental</a>
           </div>
           <div class="card-footer text-muted">
-            Created {{booking.createdAt}}
+            Created {{booking.createdAt | formatDate}}
           </div>
         </div>
       </div>

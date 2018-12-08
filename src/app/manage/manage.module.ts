@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule} from '@angular/router';
 import { CommonModule } from  '@angular/common';
+import { NgPipesModule } from 'ngx-pipes';
  
 import { ManageComponent } from './manage.component';
 import { ManageBookingComponent } from './manage-booking/manage-booking.component';
 import { ManageJobComponent } from './manage-job/manage-job.component';
+import { FormatDatePipe } from '../common/pipes/format-date.pipe';
 
 import { JobService } from '../job/shared/job.service';
 import { BookingService } from '../booking/shared/booking.service';
@@ -25,11 +27,13 @@ const routes: Routes = [
   declarations: [
   ManageComponent,
   ManageBookingComponent,
-  ManageJobComponent
+  ManageJobComponent,
+  FormatDatePipe
 ],
   imports: [
     RouterModule.forChild(routes),
-    CommonModule
+    CommonModule,
+    NgPipesModule
   ],
   providers: [
     JobService,
