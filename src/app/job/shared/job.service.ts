@@ -24,4 +24,8 @@ export class JobService{
   public createJob(job: Job): Observable<any> {
     return this.http.post('/api/v1/jobs', job);
   }
+
+  public getUserJobs(): Observable<any> {
+    return this.http.get('/api/v1/jobs/manage');
+  }
 }

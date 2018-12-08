@@ -6,6 +6,8 @@ import { ManageComponent } from './manage.component';
 import { ManageBookingComponent } from './manage-booking/manage-booking.component';
 import { ManageJobComponent } from './manage-job/manage-job.component';
 
+import { JobService } from '../job/shared/job.service';
+import { BookingService } from '../booking/shared/booking.service';
 import { AuthGuard } from '../auth/shared/auth.guard';
 
 const routes: Routes = [
@@ -30,7 +32,8 @@ const routes: Routes = [
     CommonModule
   ],
   providers: [
-
+    JobService,
+    BookingService
   ]
 
 })
