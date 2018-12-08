@@ -15,7 +15,7 @@
 	            <p class="card-text booking-days"> {{booking.startAt | formatDate}} - {{booking.endAt | formatDate}} | {{booking.days}} 
 	            days</p>
 
-            <p class="card-text booking-price"><span>Price: </span> <span class="booking-price-value"> Rs {{booking.totalPrice}}</span></p>
+            <p class="card-text"><span>Price: </span> <span class="booking-price-value"> Rs {{booking.totalPrice}}</span></p>
             <a *ngIf="booking.job" class="btn btn-bwm" routerLink="/jobs/{{booking.job._id}}">Go to Rental</a>
           </div>
           <div class="card-footer text-muted">
