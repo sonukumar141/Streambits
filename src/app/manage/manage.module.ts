@@ -3,6 +3,7 @@ import { Routes, RouterModule} from '@angular/router';
 import { CommonModule } from  '@angular/common';
 import { NgPipesModule } from 'ngx-pipes';
  
+import { ManageJobBookingComponent } from './manage-job/manage-job-booking/manage-job-booking.component';
 import { ManageComponent } from './manage.component';
 import { ManageBookingComponent } from './manage-booking/manage-booking.component';
 import { ManageJobComponent } from './manage-job/manage-job.component';
@@ -28,7 +29,8 @@ const routes: Routes = [
   ManageComponent,
   ManageBookingComponent,
   ManageJobComponent,
-  FormatDatePipe
+  FormatDatePipe,
+  ManageJobBookingComponent
 ],
   imports: [
     RouterModule.forChild(routes),

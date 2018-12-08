@@ -6,9 +6,9 @@
         <div class="card text-center">
           <div class="card-block">
             <h4 class="card-title">{{job.title}} - {{job.city | ucwords}}</h4>
-            <a class="btn btn-ghost" routerLink="/jobs/{{job._id}}">Go to Job</a>
+            <a class="btn btn-bwm btn-ghost" routerLink="/jobs/{{job._id}}">Go to Job</a>
             <span *ngIf="job.bookings.length > 0">
-              <button class="btn btn-bwm">Show Jobs</button>
+              <streambits-manage-job-booking></streambits-manage-job-booking>
             </span>
           </div>
           <div class="card-footer text-muted">
