@@ -41,6 +41,33 @@ router.get('/:id', function(req, res){
 		});
 });
 
+router.patch('/:id', UserCtrl.authMiddleware, function(req, res) {
+	const jobData = req.body;
+	const user = res.locals.user;
+
+	Job
+	  .findById(req.params.id)
+	  .populate('user')
+	  .exec(function(err, foundJob) {
+	  		if(err) {
+	  			return res.status(422).send({errors: normalizeErrors(err.errors)});
+	  		}
+
+	  		if(foundJob.user.id !== user.id) {
+	  			return res.status(422).send({errors: [{title: 'Invalid User', detail: 'This job does not belongs to you.'}]});
+	  		}
+
+	  		foundJob.set(jobData);
+	  		foundJob.save(function(err) {
+		  		if(err) {
+		  			return res.status(422).send({errors: normalizeErrors(err.errors)});
+		  		}	  			
+
+		  		return res.status(200).send(foundJob);
+	  		});
+	  });
+});
+
 
 router.delete('/:id', UserCtrl.authMiddleware, function(req, res) {
 	const user = res.locals.user;
