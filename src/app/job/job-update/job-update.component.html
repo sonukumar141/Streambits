@@ -43,9 +43,14 @@
             (entityUpdated)="updateJob(job._id, $event)">
           </streambits-editable-input>          
 
-          <p class="job-description">
-            {{job.description}}
-          </p>
+          <streambits-editable-textarea
+            [(entity)]="job"
+            [field]="'description'"
+            [className]="'job-description'"
+            [rows]="'6'"
+            [cols]="'50'"
+            (entityUpdated)="updateJob(job._id, $event)">
+          </streambits-editable-textarea>          
           <hr>
           <div class="job-assets">
             <h3 class="title">Assets</h3>
