@@ -25,7 +25,8 @@
           <streambits-editable-input
             [(entity)]="job"
             [field]="'title'"
-            [className]="'job-title'"> 
+            [className]="'job-title'"
+            (entityUpdated)="updateJob($event)"> 
           </streambits-editable-input>
           
           <h2 class="job-city">{{job.city}}</h2>

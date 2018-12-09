@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'streambits-editable-input',
@@ -11,11 +11,20 @@ export class EditableInputComponent implements OnInit {
 
   @Input() field: string;
 
+  @Input() className: string;
+
+  @Output() entityUpdated = new EventEmitter();
+
   isActiveInput: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  updateEntity() {
+  	debugger;
+  	this.entityUpdated.emit('Some Value');
   }
 
 }

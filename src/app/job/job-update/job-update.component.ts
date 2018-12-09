@@ -29,4 +29,9 @@ export class JobUpdateComponent implements OnInit {
 	});
  }
 
+ updateJob(value) {
+    debugger;
+    console.log(value);
+    alert('Update Job Called');
+ }
 }
