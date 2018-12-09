@@ -6,6 +6,7 @@ import { NgPipesModule } from 'ngx-pipes';
 import { MapModule } from '../common/map/map.module';
 import { Daterangepicker } from 'ng2-daterangepicker';
 import { FormsModule } from '@angular/forms';
+import { EditableModule } from '../common/components/editable/editable.module';
 
 import { JobListComponent } from './job-list/job-list.component';
 import { JobListItemComponent } from './job-list-item/job-list-item.component';
@@ -54,7 +55,8 @@ const routes: Routes = [
         NgPipesModule,
         MapModule,
         Daterangepicker,
-        FormsModule
+        FormsModule,
+        EditableModule
 			  ],
 	providers: [
       JobService,
