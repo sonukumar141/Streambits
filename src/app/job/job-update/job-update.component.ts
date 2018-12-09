@@ -29,9 +29,14 @@ export class JobUpdateComponent implements OnInit {
 	});
  }
 
- updateJob(value) {
-    debugger;
-    console.log(value);
-    alert('Update Job Called');
+ updateJob(jobId: string, jobData: any) {
+    this.jobService.updateJob(jobId, jobData).subscribe(
+    (updatedJob: Job) => {
+        debugger;
+        this.job = updatedJob;
+    },
+    () => {
+
+    })
  }
 }

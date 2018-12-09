@@ -32,4 +32,8 @@ export class JobService{
   public deleteJob(jobId: string): Observable<any> {
     return this.http.delete(`/api/v1/jobs/${jobId}`);
   }
+
+  public updateJob(jobId: string, jobData: any):  Observable<any> {
+      return this.http.patch(`/api/v1/jobs/${jobId}`, jobData);
+  }
 }

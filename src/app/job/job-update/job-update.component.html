@@ -26,10 +26,23 @@
             [(entity)]="job"
             [field]="'title'"
             [className]="'job-title'"
-            (entityUpdated)="updateJob($event)"> 
+            (entityUpdated)="updateJob(job._id, $event)"> 
           </streambits-editable-input>
           
-          <h2 class="job-city">{{job.city}}</h2>
+          <streambits-editable-input
+            [(entity)]="job"
+            [field]="'city'"
+            [className]="'job-city'"
+            (entityUpdated)="updateJob(job._id, $event)"> 
+          </streambits-editable-input>
+
+          <streambits-editable-input
+            [(entity)]="job"
+            [field]="'street'"
+            [className]="'job-street'"
+            (entityUpdated)="updateJob(job._id, $event)">
+          </streambits-editable-input>          
+
           <p class="job-description">
             {{job.description}}
           </p>
