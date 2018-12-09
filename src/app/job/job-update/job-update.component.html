@@ -21,9 +21,11 @@
               <img src="https://api.adorable.io/avatars/285/abott@adorable.png" alt="">
               <span>{{job.user.username}}</span>
           </div>
-
-          <h1 class="job-title">{{job.title}}</h1>
-          <streambits-editable-input> </streambits-editable-input>
+          
+          <streambits-editable-input
+            [(entity)]="job"
+            [field]="'title'"> 
+          </streambits-editable-input>
           
           <h2 class="job-city">{{job.city}}</h2>
           <p class="job-description">
