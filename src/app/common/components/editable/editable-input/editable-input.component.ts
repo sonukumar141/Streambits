@@ -16,6 +16,10 @@ export class EditableInputComponent implements OnInit {
 
   @Input() className: string;
 
+  @Input() type: string = 'text';
+
+  @Input() style: any;
+
   @Output() entityUpdated = new EventEmitter();
 
   isActiveInput: boolean = false;
