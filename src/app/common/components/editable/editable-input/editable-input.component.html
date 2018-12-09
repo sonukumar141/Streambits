@@ -1,10 +1,11 @@
-<div>
+<div class="editable-component">
 	
-	<input *ngIf="isActiveInput" 
+	<input *ngIf="isActiveInput"
+		   class="{{className}}" 
 		   type="text"
 		   [(ngModel)]="entity[field]"
 		   [value]="entity[field]">
-	<span *ngIf="!isActiveInput" class="inline"> {{entity[field]}} </span>
+	<span *ngIf="!isActiveInput" class="{{className}} inline"> {{entity[field]}} </span>
 	<div class="inline">
 		<button *ngIf="!isActiveInput"
 				class="btn btn-sm btn-warning btn-editable" 
