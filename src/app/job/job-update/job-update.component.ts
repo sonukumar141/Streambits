@@ -32,7 +32,6 @@ export class JobUpdateComponent implements OnInit {
  updateJob(jobId: string, jobData: any) {
     this.jobService.updateJob(jobId, jobData).subscribe(
     (updatedJob: Job) => {
-        debugger;
         this.job = updatedJob;
     },
     () => {
