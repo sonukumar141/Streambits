@@ -11,6 +11,7 @@ import { Job } from '../shared/job.model'
 export class JobUpdateComponent implements OnInit {
 
   job: Job;
+  jobCategories: string[] = Job.CATEGORIES;
 
   constructor(private route: ActivatedRoute, 
   			  private jobService: JobService) { }

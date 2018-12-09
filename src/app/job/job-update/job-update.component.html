@@ -15,7 +15,25 @@
     <div class="row">
       <div class="col-md-8">
         <div class="job">
-          <h2 class="job-type {{job.category}}">{{job.shared}} {{job.category}}</h2>
+          <h2 class="job-type {{job.category}}">
+          Shared
+          <streambits-editable-select
+            [(entity)]="job"
+            [field]="'shared'"
+            [options]="[true, false]"
+            [style]="{'display': 'inline-block'}"
+            [className]="'job-shared'"
+            (entityUpdated)="updateJob(job._id, $event)"> 
+          </streambits-editable-select>
+
+          <streambits-editable-select
+            [(entity)]="job"
+            [field]="'category'"
+            [options]="jobCategories"
+            [className]="'job-category'"
+            (entityUpdated)="updateJob(job._id, $event)"> 
+          </streambits-editable-select>
+          </h2>
 
           <div class="job-owner">
               <img src="https://api.adorable.io/avatars/285/abott@adorable.png" alt="">
