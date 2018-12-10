@@ -4,6 +4,8 @@
 		   class="{{className}}" 
 		   [(ngModel)]="entity[entityField]"
 		   [value]="entity[entityField]"
+		   (keydown.escape)="cancelUpdate()"
+		   (keyup.enter)="updateEntity()"		   
 		   rows="{{rows}}"
 		   cols="{{cols}}">
     </textarea>

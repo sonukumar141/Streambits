@@ -3,6 +3,8 @@
 	<input *ngIf="isActiveInput"
 		   class="{{className}}" 
 		   type="type"
+		   (keydown.escape)="cancelUpdate()"
+		   (keyup.enter)="updateEntity()"
 		   [(ngModel)]="entity[entityField]"
 		   [value]="entity[entityField]">
 	<span *ngIf="!isActiveInput" class="{{className}} inline"> {{entity[entityField]}} </span>
