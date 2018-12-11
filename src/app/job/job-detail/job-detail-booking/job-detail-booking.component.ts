@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewContainerRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Booking } from '../../../booking/shared/booking.model';
 import { Job } from '../../shared/job.model';
 import { HelperService } from '../../../common/service/helper.service';
 import { BookingService } from '../../../booking/shared/booking.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { DaterangePickerComponent } from 'ng2-daterangepicker';
 import { AuthService } from '../../../auth/shared/auth.service';
 import * as moment from 'moment';
@@ -38,7 +39,11 @@ export class JobDetailBookingComponent implements OnInit {
   constructor(private helper: HelperService, 
               private modalService: NgbModal,
               private bookingService: BookingService,
-              public auth: AuthService) { }
+              private toastr: ToastsManager,
+              private vcr: ViewContainerRef,
+              public auth: AuthService) { 
+              	this.toastr.setRootViewContainerRef(vcr);
+              }
 
   ngOnInit() {
   		this.newBooking = new Booking();
@@ -86,6 +91,7 @@ export class JobDetailBookingComponent implements OnInit {
   		this.addNewBookedOutDates(bookingData);
   		this.newBooking = new Booking();
   		this.modalRef.close();
+  		this.toastr.success('Booking has been successfully created, check your booking detail in manage section', 'Success!');
   		this.resetDatePicker();
   	},
   	(errorResponse: any) => {
