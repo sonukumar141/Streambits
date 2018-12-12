@@ -4,6 +4,7 @@ import { JobService } from '../shared/job.service';
 import { Job } from '../shared/job.model';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UcWordsPipe } from 'ngx-pipes';
 
 import { Subject } from 'rxjs';
 
@@ -22,7 +23,10 @@ export class JobUpdateComponent implements OnInit {
   constructor(private route: ActivatedRoute, 
   			  private jobService: JobService,
           private toastr: ToastsManager,
-          private vcr: ViewContainerRef) { 
+          private vcr: ViewContainerRef,
+          private upperPipe: UcWordsPipe) { 
+
+            this.transformLocation = this.transformLocation.bind(this);
             this.toastr.setRootViewContainerRef(vcr);
           }
 
@@ -32,6 +36,10 @@ export class JobUpdateComponent implements OnInit {
   		this.getJob(params['jobId']);
  	})
   }
+
+transformLocation(location: string): string {
+  return this.upperPipe.transform(location);
+}
 
  getJob(jobId: string){
 	this.jobService.getJobById(jobId).subscribe(

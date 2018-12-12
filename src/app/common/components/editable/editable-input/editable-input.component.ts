@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { EditableComponent } from '../editable-component';
 
 @Component({
@@ -9,4 +9,6 @@ import { EditableComponent } from '../editable-component';
 export class EditableInputComponent extends EditableComponent{
 
 	@Input() type: string = 'text';
+
+	@Input() transformView = value => value;
 }

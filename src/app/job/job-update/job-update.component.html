@@ -52,6 +52,7 @@
           <streambits-editable-input
             [(entity)]="job"
             [field]="'city'"
+            [transformView]="transformLocation"
             [className]="'job-city'"
             (entityUpdated)="updateJob(job._id, $event)"> 
           </streambits-editable-input>
@@ -59,6 +60,7 @@
           <streambits-editable-input
             [(entity)]="job"
             [field]="'street'"
+            [transformView]="transformLocation"
             [className]="'job-street'"
             (entityUpdated)="updateJob(job._id, $event)">
           </streambits-editable-input>          
