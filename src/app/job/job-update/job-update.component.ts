@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JobService } from '../shared/job.service';
 import { Job } from '../shared/job.model';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { Subject } from 'rxjs';
 
@@ -18,7 +20,11 @@ export class JobUpdateComponent implements OnInit {
   locationSubject: Subject<any> =  new Subject();
 
   constructor(private route: ActivatedRoute, 
-  			  private jobService: JobService) { }
+  			  private jobService: JobService,
+          private toastr: ToastsManager,
+          private vcr: ViewContainerRef) { 
+            this.toastr.setRootViewContainerRef(vcr);
+          }
 
   ngOnInit() {
   	this.route.params.subscribe(
@@ -39,13 +45,13 @@ export class JobUpdateComponent implements OnInit {
     (updatedJob: Job) => {
         this.job = updatedJob;
 
-        debugger;
         if (jobData.city || jobData.street) {
           this.locationSubject.next(this.job.city + ', ' + this.job.street);
         }
     },
-    () => {
-
+    (errorResponse: HttpErrorResponse) => {
+        this.toastr.error(errorResponse.error.errors[0].detail, 'Error');
+        this.getJob(jobId);
     })
  }
 }

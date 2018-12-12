@@ -26,7 +26,6 @@ export class MapComponent implements OnInit, OnDestroy {
     if(this.locationSubject) {
       this.locationSubject.subscribe(
       (location: string) => {
-        debugger;
         this.getLocation(location);
       });
     }

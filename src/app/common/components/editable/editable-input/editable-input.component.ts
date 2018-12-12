@@ -6,7 +6,7 @@ import { EditableComponent } from '../editable-component';
   templateUrl: './editable-input.component.html',
   styleUrls: ['./editable-input.component.scss']
 })
-export class EditableInputComponent extends EditableComponent implements OnInit {
+export class EditableInputComponent extends EditableComponent{
 
 	@Input() type: string = 'text';
 }

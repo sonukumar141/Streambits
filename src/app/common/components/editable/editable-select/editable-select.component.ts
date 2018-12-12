@@ -6,7 +6,7 @@ import { EditableComponent } from '../editable-component';
   templateUrl: './editable-select.component.html',
   styleUrls: ['./editable-select.component.scss']
 })
-export class EditableSelectComponent extends EditableComponent implements OnInit {
+export class EditableSelectComponent extends EditableComponent{
 
 	@Input() public options: any[];
 }

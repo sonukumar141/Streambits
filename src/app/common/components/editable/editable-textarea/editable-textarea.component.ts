@@ -6,7 +6,7 @@ import { EditableComponent } from '../editable-component';
   templateUrl: './editable-textarea.component.html',
   styleUrls: ['./editable-textarea.component.scss']
 })
-export class EditableTextareaComponent extends EditableComponent implements OnInit {
+export class EditableTextareaComponent extends EditableComponent{
 
   @Input() rows: string;
 
