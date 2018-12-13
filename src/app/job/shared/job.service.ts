@@ -36,4 +36,8 @@ export class JobService{
   public updateJob(jobId: string, jobData: any):  Observable<any> {
       return this.http.patch(`/api/v1/jobs/${jobId}`, jobData);
   }
+
+  public verifyJobUser(jobId: string): Observable<any> {
+    return this.http.get(`/api/v1/jobs/${jobId}/verify-user`);
+  }
 }

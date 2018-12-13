@@ -21,6 +21,7 @@ import { HelperService } from '../common/service/helper.service';
 import { UppercasePipe } from '../common/pipes/uppercase.pipe';
 
 import { AuthGuard } from '../auth/shared/auth.guard';
+import { JobGuard } from './shared/job.guard';
 import { JobCreateComponent } from './job-create/job-create.component';
 import { JobUpdateComponent } from './job-update/job-update.component';
 
@@ -30,7 +31,7 @@ const routes: Routes = [
   children: [
   	{path: '', component: JobListComponent},
     {path: 'new', component: JobCreateComponent, canActivate: [AuthGuard]},
-    {path: ':jobId/edit', component: JobUpdateComponent, canActivate: [AuthGuard]},
+    {path: ':jobId/edit', component: JobUpdateComponent, canActivate: [AuthGuard, JobGuard]},
   	{path: ':jobId', component: JobDetailComponent },
     {path: ':city/h', component: JobSearchComponent}
   ]
@@ -62,7 +63,8 @@ const routes: Routes = [
       JobService,
       HelperService,
       BookingService,
-      UcWordsPipe
+      UcWordsPipe,
+      JobGuard
     ]
 })
 

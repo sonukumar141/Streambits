@@ -25,6 +25,25 @@ router.get('/manage', UserCtrl.authMiddleware, function(req, res) {
 	})
 });
 
+router.get('/:id/verify-user', UserCtrl.authMiddleware, function(req, res){
+	const user = res.locals.user;
+
+	Job.findById(req.params.id)
+	   .populate('user')
+	   .exec(function(err, foundJob){
+		  	if(err) {
+		  		return res.status(422).send({errors: normalizeErrors(err.errors)});
+		  	}
+
+		  	if(foundJob.user.id !== user.id) {
+		  		return res.status(422).send({errors: [{title: 'Invalid User', detail: 'This job does not belongs to you.'}]});
+		  	}
+
+		  	return res.json({status: 'verfied'});
+	   });
+
+});
+
 router.get('/:id', function(req, res){
 
 	const jobId = req.params.id;

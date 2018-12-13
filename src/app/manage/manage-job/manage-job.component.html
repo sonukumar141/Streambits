@@ -13,10 +13,12 @@
           </div>
           <div class="card-footer text-muted">
              <p>Created at {{job.createdAt | formatDate}}</p> <!-- Created At -->
+
              <button (click)="jobDeleteIndex = i"
              		 *ngIf="jobDeleteIndex !== i"
                      type="button" 
                      class="btn btn-bwm btn-delete">Delete</button>
+             <a class="btn btn-warning btn-edit" routerLink="/jobs/{{job._id}}/edit">Edit</a>
              <div *ngIf="jobDeleteIndex === i">
              	<p class="confirm-message">Do you confirm delete?</p> 
              	<button (click)="deleteJob(job._id)"
