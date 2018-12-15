@@ -23,6 +23,8 @@ export class ImageUploadComponent {
 
   @Output() imageUploaded = new EventEmitter();
   @Output() imageError = new EventEmitter();
+  @Output() imageLoadedToContainer = new EventEmitter();
+  @Output() croppingCanceled = new EventEmitter();
 
   selectedFile: FileSnippet;
   imageChangedEvent: any;
@@ -54,6 +56,15 @@ export class ImageUploadComponent {
   	}
 
   	return this.selectedFile = new FileSnippet('',file);
+  }
+
+  imageLoaded() {
+    this.imageLoadedToContainer.emit();
+  }
+
+  cancelCropping() {
+    this.imageChangedEvent = null;
+    this.croppingCanceled.emit();
   }
 
   processFile(event: any) {
