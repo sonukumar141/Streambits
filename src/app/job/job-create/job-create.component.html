@@ -47,7 +47,8 @@
           </div>
 
           <div class="form-group">
-                <streambits-image-upload></streambits-image-upload>
+                <streambits-image-upload (imageUploaded)="handleImageUpload($event)"
+                                         (imageError)="handleImageError($event)"></streambits-image-upload>
           </div>
 
           <div class="form-group">
@@ -79,7 +80,7 @@
           </div>
 
           <button (click)="createJob()" 
-          		  [disabled]="!jobForm.form.valid"
+          		  [disabled]="!jobForm.form.valid || !newJob.image"
           		  type="button" 
           		  class="btn btn-bwm">Submit
           </button>

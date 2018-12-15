@@ -27,6 +27,15 @@ export class JobCreateComponent implements OnInit {
   	this.newJob = new Job();
   }
 
+  handleImageUpload(imageUrl: string){
+    debugger;
+    this.newJob.image = imageUrl;
+  }
+
+  handleImageError(){
+    this.newJob.image = '';
+  }
+
   createJob() {
   	this.jobService.createJob(this.newJob).subscribe(
   	(job: Job) => {
