@@ -15,7 +15,7 @@ export class EditableImageComponent extends EditableComponent {
 	}
 
 	handleImageError() {
-
+		this.cancelUpdate();
 	}
 
 	handleImageLoad() {
