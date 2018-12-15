@@ -1,3 +1,6 @@
-<p>
-  image-upload works!
-</p>
+<input #imageInput
+       type="file"
+	   accept="image/*"
+	   (change)='processFile(imageInput)'>
+
+<img *ngIf="selectedFile" [src]="selectedFile.src" alt="">
