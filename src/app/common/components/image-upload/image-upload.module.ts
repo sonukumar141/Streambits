@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { ImageUploadComponent } from './image-upload.component';
 
@@ -8,7 +9,8 @@ import { ImageUploadService } from './image-upload.service';
 @NgModule({
 	
 	imports: [
-		CommonModule
+		CommonModule,
+		HttpModule
 	],
 	providers: [
 		ImageUploadService
