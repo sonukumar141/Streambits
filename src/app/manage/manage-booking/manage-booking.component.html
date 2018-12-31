@@ -16,7 +16,7 @@
 	            days</p>
 
             <p class="card-text"><span>Price: </span> <span class="booking-price-value"> Rs {{booking.totalPrice}}</span></p>
-            <a *ngIf="booking.job" class="btn btn-bwm" routerLink="/jobs/{{booking.job._id}}">Go to Rental</a>
+            <a *ngIf="booking.job" class="btn btn-bwm" routerLink="/jobs/{{booking.job._id}}">Go to Event</a>
           </div>
           <div class="card-footer text-muted">
             Created {{booking.createdAt | formatDate}}
@@ -25,8 +25,8 @@
       </div>
     </ng-container>
     <div *ngIf="bookings && bookings.length === 0" class="alert alert-warning">
-      You have no bookings created go to rentals section and book your place today.
-      <a class="btn btn-bwm" routerLink="/jobs">Available Jobs</a> <!-- link to /rentals -->
+      You have no bookings created go to event section and book your event today.
+      <a class="btn btn-bwm" routerLink="/jobs">Available Events</a> <!-- link to /rentals -->
     </div>
   </div>
 </section>
