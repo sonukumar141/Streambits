@@ -7,9 +7,10 @@ const FakeDb = require('./fake-db');
 const path = require('path');
 
 const jobRoutes = require('./routes/jobs'),
-      userRoutes = require('./routes/users');
-      bookingRoutes = require('./routes/bookings');
-      imageUploadRoutes = require('./routes/image-upload');
+      userRoutes = require('./routes/users'),
+      bookingRoutes = require('./routes/bookings'),
+	  imageUploadRoutes = require('./routes/image-upload'),
+	  reviewRoutes = require('./routes/reviews');
 
 mongoose.connect(config.DB_URI).then(() => {
 
@@ -26,7 +27,8 @@ app.use(bodyParser.json());
 app.use('/api/v1/jobs', jobRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
-app.use('/api/v1', imageUploadRoutes)
+app.use('/api/v1/reviews', reviewRoutes);
+app.use('/api/v1', imageUploadRoutes);
 
 if(process.env.NODE_ENV === 'production') {
 	const appPath = path.join(__dirname, '..', 'dist');

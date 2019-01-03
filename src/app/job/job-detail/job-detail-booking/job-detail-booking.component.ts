@@ -33,7 +33,7 @@ export class JobDetailBookingComponent implements OnInit {
   	alwaysShowCalendars: false,
   	opens: 'left',
   	autoUpdateInput: false,
-  	isInvalidDate: this.checkForInvalidDates.bind(this)
+  	//isInvalidDate: this.checkForInvalidDates.bind(this)
   };
 
   constructor(private helper: HelperService, 
