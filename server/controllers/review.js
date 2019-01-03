@@ -16,7 +16,7 @@ exports.createReview = function(req, res) {
            .populate({path: 'job', populate: {path: 'user'}})
            .populate('review')
            .populate('user')
-           .exec((err, foundBooking) => {
+           .exec(async(err, foundBooking) => {
                 if(err){
                     return res.status(422).send({errors: normalizeErrors(err.errors)});
                 }          
@@ -32,5 +32,32 @@ exports.createReview = function(req, res) {
                 if(foundBookingUserId !== user.id) {
                     return res.status(422).send({errors: [{title: 'Invalid User!', detail: 'Cannot create review on other\'s booking'}]});
                 }
+
+
+                const timeNow = moment();
+                const endAt = moment(foundBooking.endAt);
+
+                if(!endAt.isBefore(timeNow)){
+                    return res.status(422).send({errors: [{title: 'Invalid Date!', detail: 'You can review after booking is over'}]});
+                }
+
+                if(foundBooking.review) {
+                    return res.status(422).send({errors: [{title: 'Review already done!', detail: 'You have already reviewed this booking'}]});
+                }
+
+                const review = new Review(reviewData);
+                review.user = user;
+                review.job = job;
+                foundBooking.review = review;
+
+                try{
+                    await foundBooking.save();
+                    const savedReview = await review.save();
+                    
+                    return res.json(savedReview);
+                }catch(err){
+                    return res.status(422).send({errors: normalizeErrors(err.errors)});
+                }
+
            });
 }
