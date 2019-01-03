@@ -9,7 +9,8 @@ const bookingSchema = new Schema({
 	guests: Number,
 	createdAt: { type: Date, default: Date.now },
 	user: { type: Schema.Types.ObjectId, ref: 'User' },
-	job: { type: Schema.Types.ObjectId, ref: 'Job' }
+	job: { type: Schema.Types.ObjectId, ref: 'Job' },
+	review: {type: Schema.Types.ObjectId, ref: 'Review'}
 });
 
 module.exports = mongoose.model('Booking', bookingSchema);
