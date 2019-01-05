@@ -7,6 +7,20 @@ const Booking = require('../models/booking');
 const moment = require('moment');
 const { normalizeErrors } = require('../helpers/mongoose');
 
+exports.getReviews = function(req, res){
+    const { jobId } = req.query;
+
+    Review.find({'job': jobId})
+          .populate('user')
+          .exec((err, reviews) => {
+                if(err){
+                    return res.status(422).send({errors: normalizeErrors(err.errors)});
+                }
+
+                return res.json(reviews);
+          });
+}
+
 exports.createReview = function(req, res) {
     const reviewData = req.body;
     const { bookingId } = req.query;
@@ -43,7 +57,7 @@ exports.createReview = function(req, res) {
 
                 if(foundBooking.review) {
                     return res.status(422).send({errors: [{title: 'Review already done!', detail: 'You have already reviewed this booking'}]});
-                }
+                }               
 
                 const review = new Review(reviewData);
                 review.user = user;

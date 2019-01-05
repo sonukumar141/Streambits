@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ALLOWED_RATINGS = [1, 2, 3, 4, 5];
+const ALLOWED_RATINGS = [1,2,3,4,5];
 
 const reviewSchema = new Schema({
     rating: Number,
@@ -14,10 +14,12 @@ const reviewSchema = new Schema({
 module.exports = mongoose.model('Review', reviewSchema);
 
 reviewSchema.pre('save', function(next){
-    if(ALLOWED_RATINGS.indexOf(this.rating) >= 0){
+    if(ALLOWED_RATINGS.indexOf(this.rating) >= 0) {
         next();
-    }else{
-        const err = new Error('Not a valid rating');
+    } else {
+        const err = new Error({rating: "Invalid Rating"});
+        err.errors = {};
+        err.errors.rating = {message: 'This rating is not allowed!'}
         next(err);
     }
 });
