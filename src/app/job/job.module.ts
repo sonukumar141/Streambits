@@ -15,6 +15,7 @@ import { JobListItemComponent } from './job-list-item/job-list-item.component';
 import { JobComponent } from './job.component';
 import { JobDetailComponent } from './job-detail/job-detail.component';
 import { JobDetailBookingComponent } from './job-detail/job-detail-booking/job-detail-booking.component';
+import { FrontImageComponent } from '../common/front-image/front-image.component';
 import { JobSearchComponent } from './job-search/job-search.component';
 
 import { JobService } from './shared/job.service';
@@ -50,7 +51,8 @@ const routes: Routes = [
       JobDetailBookingComponent,
       JobSearchComponent,
       JobCreateComponent,
-      JobUpdateComponent
+      JobUpdateComponent,
+      FrontImageComponent
 	],
 	imports: [CommonModule,
 			  RouterModule.forChild(routes),
