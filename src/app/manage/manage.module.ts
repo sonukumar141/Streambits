@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule} from '@angular/router';
 import { CommonModule } from  '@angular/common';
 import { NgPipesModule } from 'ngx-pipes';
+import { ReviewModule } from '../review/review.module';
  
 import { ManageJobBookingComponent } from './manage-job/manage-job-booking/manage-job-booking.component';
 import { ManageComponent } from './manage.component';
@@ -35,7 +36,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
-    NgPipesModule
+    NgPipesModule,
+    ReviewModule
   ],
   providers: [
     JobService,
