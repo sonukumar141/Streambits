@@ -15,6 +15,7 @@ export class ReviewComponent {
 
     @Input() bookingId: string;
 
+    @Output() reviewSubmitted = new EventEmitter();
     modalRef: any;
 
     review: Review = {text: '', rating: 3};
@@ -34,6 +35,7 @@ export class ReviewComponent {
         this.reviewService.createReview(this.review, this.bookingId)
                           .subscribe(
                               (review: Review) => {
+                                this.reviewSubmitted.emit(review);
                                 this.modalRef.close();
                               },
                               (errorResponse: HttpErrorResponse) => {

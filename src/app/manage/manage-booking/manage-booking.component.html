@@ -2,7 +2,7 @@
   <h1 class="page-title">My Bookings</h1>
   <div class="row">
      <ng-container *ngIf="bookings && bookings.length > 0">
-      <div *ngFor="let booking of bookings" class="col-md-4">
+      <div *ngFor="let booking of bookings; let i = index" class="col-md-4">
         <div class="card text-center">
           <div class="card-header">
             {{booking.job ? booking.job.category : "Deleted Job"}}
@@ -20,7 +20,9 @@
           </div>
           <div class="card-footer text-muted">
             Created {{booking.createdAt | formatDate}}
-            <streambits-review [bookingId]="booking._id"></streambits-review>
+            <streambits-review *ngIf="!booking.review && isExpired(booking.endAt)" 
+                               [bookingId]="booking._id"
+                               (reviewSubmitted)="reviewPublished(i, $event)"></streambits-review>
           </div>
         </div>
       </div>
