@@ -1,12 +1,12 @@
 <section id="userRentals">
-  <h1 class="page-title">My Jobs</h1>
+  <h1 class="page-title">My Listings</h1>
   <div class="row">
     <ng-container *ngIf="jobs && jobs.length > 0">
       <div *ngFor="let job of jobs; let i = index" class="col-md-4">
         <div class="card text-center">
           <div class="card-block">
             <h4 class="card-title">{{job.title}} - {{job.city | ucwords}}</h4>
-            <a class="btn btn-ghost" routerLink="/jobs/{{job._id}}">Go to Job</a>
+            <a class="btn btn-ghost" routerLink="/jobs/{{job._id}}">Go to Listings</a>
             <span *ngIf="job.bookings.length > 0">
               <streambits-manage-job-booking [bookings]="job.bookings"></streambits-manage-job-booking>
             </span>
@@ -32,9 +32,9 @@
     </ng-container>
     <div *ngIf="jobs && jobs.length === 0" class="col-md-8">
       <div class="alert alert-warning">
-        You dont have any jobs currenty created. If you want advertised your property
+        You dont have any jobs currenty created. If you want advertised your business, 
         please follow this link.
-        <a class="btn btn-bwm" routerLink="/jobs/new">Create Job</a>
+        <a class="btn btn-bwm" routerLink="/jobs/new">List your business</a>
       </div>
     </div>
   </div>
