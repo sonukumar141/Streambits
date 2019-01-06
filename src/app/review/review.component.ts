@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReviewService } from './shared/review.service';
 
 import { Review } from './shared/review.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'streambits-review',
@@ -12,9 +13,12 @@ import { Review } from './shared/review.model';
 })
 export class ReviewComponent {
 
+    @Input() bookingId: string;
+
     modalRef: any;
 
     review: Review = {text: '', rating: 3};
+    errors: any[];
 
     constructor(private modalService: NgbModal,
                 private reviewService: ReviewService){}
@@ -23,12 +27,19 @@ export class ReviewComponent {
     }
 
     handleRatingChange(event) {
-        debugger;
-        this.review = event.rating;
+        this.review.rating = event.rating;
     }
 
     confirmReview(){
-        debugger;
-        console.log(this.review);
+        this.reviewService.createReview(this.review, this.bookingId)
+                          .subscribe(
+                              (review: Review) => {
+                                this.modalRef.close();
+                              },
+                              (errorResponse: HttpErrorResponse) => {
+                                  this.errors = errorResponse.error.errors;
+                                  
+                              } 
+                          )
     }
 }
