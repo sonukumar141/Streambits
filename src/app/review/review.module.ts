@@ -6,6 +6,8 @@ import { StarRatingModule } from 'angular-star-rating';
 
 import { ReviewComponent } from './review.component';
 
+import { ReviewService } from './shared/review.service';
+
 @NgModule({
     declarations: [
         ReviewComponent
@@ -20,7 +22,7 @@ import { ReviewComponent } from './review.component';
         StarRatingModule.forRoot()
     ],
     providers: [
-
+        ReviewService
     ]
 })
 
