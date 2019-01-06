@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { StarRatingModule } from 'angular-star-rating';
 
 import { ReviewComponent } from './review.component';
 
@@ -15,7 +16,8 @@ import { ReviewComponent } from './review.component';
     imports: [
         CommonModule,
         FormsModule,
-        NgbModule
+        NgbModule,
+        StarRatingModule.forRoot()
     ],
     providers: [
 

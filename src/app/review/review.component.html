@@ -15,7 +15,9 @@
                       class="form-control" 
                       placeholder="Write about your experience"
                       id="text"
-                      name="text"></textarea>
+                      name="text"
+                      [(ngModel)]="review.text"></textarea>
+            <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>
         </form>
     </div>
     <div class="modal-footer">
