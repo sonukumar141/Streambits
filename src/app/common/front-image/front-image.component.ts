@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../auth/shared/auth.service';
 
 @Component({
 	selector: "streambits-front-image",
@@ -8,6 +9,6 @@ import { Component } from '@angular/core';
 
 export class FrontImageComponent{
 
-
+	constructor(public auth: AuthService){}
 	
 }

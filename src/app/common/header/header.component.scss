@@ -1,10 +1,10 @@
 @import 'variables';
 
 .navbar {
-  padding: 20px;
+  padding: 6px;
 
   .streambits-search {
-    height: 50px;
+    height: 38px;
     width: 300px;
   }
 
@@ -28,12 +28,18 @@
     font-size: 14px;
     .nav-link{
       color: white;
+
+      &:hover, &:focus, &:active {
+        box-shadow: none;
+        border-color: $main-color !important;
+        color: $main-color !important;
+      }
     }
-  }
+}
 
 
   .btn-streambits-search {
-    border-color: $main-color;
+    border-color: white;
     color: $main-color;
 
 

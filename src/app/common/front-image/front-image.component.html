@@ -1,3 +1,5 @@
-<div class="image-container">
+<div class="image-front">
+  <ng-container *ngIf="!auth.isAuthenticated()">
   <img src="assets/images/front-image.jpg" alt="">
+  </ng-container>
 </div>
